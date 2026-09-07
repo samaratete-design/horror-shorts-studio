@@ -37,3 +37,12 @@ dist/
 *.db
 *.sqlite
 *.sqlite3
+
+# Backup files
+*.bak
+*.before_editing
+
+# Local dev artifacts / dumps
+*.tar.gz
+collected.txt
+openapi.json

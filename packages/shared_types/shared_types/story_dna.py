@@ -7,7 +7,7 @@ dimension-by-dimension instead of relying on a single fuzzy embedding score.
 """
 from enum import Enum
 from typing import Optional
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class POV(str, Enum):
@@ -68,8 +68,7 @@ class StoryDNA(BaseModel):
         default=None, description="Vector embedding of the full DNA, populated by EmbeddingProvider"
     )
 
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True)
 
 
 # The dimensions compared individually by the Originality Engine.

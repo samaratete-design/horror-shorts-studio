@@ -1,6 +1,6 @@
 from fastapi import FastAPI
 
-from app.routers import stories, originality
+from app.routers import stories, originality, story_workflow
 
 app = FastAPI(
     title="Horror Shorts Studio API",
@@ -10,6 +10,7 @@ app = FastAPI(
 
 app.include_router(stories.router)
 app.include_router(originality.router)
+app.include_router(story_workflow.router)
 
 
 @app.get("/health")

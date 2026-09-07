@@ -7,7 +7,9 @@ Runway, etc). Concrete implementations live in this package's `impl/` modules
 and are wired up at the composition root (apps/api/app/core/container.py).
 """
 from abc import ABC, abstractmethod
+from dataclasses import dataclass
 from typing import Any, Optional
+
 from pydantic import BaseModel
 
 
@@ -53,13 +55,38 @@ class ImageProvider(ABC):
         raise NotImplementedError
 
 
+@dataclass(frozen=True)
+class GeneratedAudio:
+    """Result of a VoiceProvider generation call: the audio plus its real duration."""
+    audio: bytes
+    duration: float
+
+
 class VoiceProvider(ABC):
     @abstractmethod
-    async def generate(self, text: str, voice: str) -> bytes:
+    async def generate(self, text: str, voice: str) -> GeneratedAudio:
         raise NotImplementedError
 
 
 class VideoProvider(ABC):
     @abstractmethod
     async def generate(self, prompt: str, duration_seconds: float) -> bytes:
+        raise NotImplementedError
+@dataclass(frozen=True)
+class GeneratedVideo:
+    """Result of a VideoProvider generation call: the video plus its real duration."""
+    video: bytes
+    duration: float
+
+
+@dataclass(frozen=True)
+class GeneratedMusic:
+    """Result of a MusicProvider generation call: the audio plus its real duration."""
+    audio: bytes
+    duration: float
+
+
+class MusicProvider(ABC):
+    @abstractmethod
+    async def generate(self, prompt: str, duration_seconds: float) -> GeneratedMusic:
         raise NotImplementedError

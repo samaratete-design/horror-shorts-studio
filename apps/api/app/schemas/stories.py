@@ -23,3 +23,7 @@ class OriginalityCheckRequest(BaseModel):
 
 class OriginalityCheckResponse(BaseModel):
     decision: OriginalityDecision
+
+
+class StoryTransitionRequest(BaseModel):
+    target_state: str

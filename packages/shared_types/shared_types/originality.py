@@ -1,5 +1,5 @@
 from enum import Enum
-from pydantic import BaseModel, Field
+from pydantic import BaseModel, ConfigDict, Field
 
 
 class OriginalityVerdict(str, Enum):
@@ -25,5 +25,4 @@ class OriginalityDecision(BaseModel):
     explanation: str
     recommendation: str | None = None
 
-    class Config:
-        use_enum_values = True
+    model_config = ConfigDict(use_enum_values=True)
